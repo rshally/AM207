@@ -2,3 +2,6 @@
 *.tar
 *.tar.gz
 *.pt
+*.csv
+*-ubyte
+data_batch*
