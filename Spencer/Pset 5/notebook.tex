@@ -1,0 +1,1492 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Hallyburton\_HW5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Spencer Hallyburton}\label{spencer-hallyburton}
+
+\subsection{Homework \#4}\label{homework-4}
+
+\subsection{Collaborator: Salvador
+Barragan}\label{collaborator-salvador-barragan}
+
+\textbf{Harvard University} \textbf{Spring 2018} \textbf{Instructors:
+Rahul Dave} \textbf{Due Date: } Friday, March 2nd, 2018 at 11:00am
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tnrange}\PY{p}{,} \PY{n}{tqdm\PYZus{}notebook}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{partial}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tnrange}\PY{p}{,} \PY{n}{tqdm\PYZus{}notebook}
+        
+        \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsection{Problem 1: Optimization
+(contd)}\label{problem-1-optimization-contd}
+
+Suppose you are building a pricing model for laying down telecom cables
+over a geographical region. Your model takes as input a pair of
+coordinates, \((x, y)\), and contains two parameters,
+\(\lambda_1, \lambda_2\). Given a coordinate, \((x, y)\), and model
+parameters, the loss in revenue corresponding to the price model at
+location \((x, y)\) is described by \[
+L(x, y, \lambda_1, \lambda_2) = 0.000045\lambda_2^2 y - 0.000098\lambda_1^2 x  + 0.003926\lambda_1 x\exp\left\{\left(y^2 - x^2\right)\left(\lambda_1^2 + \lambda_2^2\right)\right\}
+\] Read the data contained in \texttt{HW3\_data.csv}. This is a set of
+coordinates configured on the curve \(y^2 - x^2 = -0.1\). Given the
+data, find parameters \(\lambda_1, \lambda_2\) that minimize the net
+loss over the entire dataset.
+
+\subsubsection{Simulated Annealing}\label{simulated-annealing}
+
+Implement Simulated Annealing initalized at
+\((\lambda_1, \lambda_2) = (-5, 0)\) to minimize our loss function
+\(L\). Compare your results to what you obtained for gradient descent
+and stochastic gradient descent initialized at
+\((\lambda_1, \lambda_2) = (-5, 0)\).
+
+For your Simulated Annealing implementation, we suggest \emph{starting}
+with following settings for parameters (you should further experiment
+with and tweak these or feel free to set your own):
+
+\begin{itemize}
+\tightlist
+\item
+  Proposal distribution: bivariate normal with covariance
+  \([[1, 0], [0, 1]]\)
+\item
+  Min Length: 500
+\item
+  Max Temperature: 10
+\end{itemize}
+
+You should also set your own cooling schedule.
+
+For each iteration, plot the parameters accepted or the cost function
+with respect to the iteration number. What is happening to the these
+parameters or costs over iterations? Connect the trends you observe in
+the visualization to the lecture on Markov Chains.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{my\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HW3\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Shape:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{my\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Data Shape: (2, 16000)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Set up functions}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        
+        \PY{k}{def} \PY{n+nf}{loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{LAMBDA}\PY{p}{)}\PY{p}{:}
+            \PY{n}{T1} \PY{o}{=}  \PY{o}{.}\PY{l+m+mi}{000045}\PY{o}{*}\PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{Y} 
+            \PY{n}{T2} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{000098}\PY{o}{*}\PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{X}
+            \PY{n}{T3} \PY{o}{=}  \PY{o}{.}\PY{l+m+mi}{003926}\PY{o}{*}\PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(} \PY{p}{(}\PY{n}{Y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{n}{X}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{T1} \PY{o}{+} \PY{n}{T2} \PY{o}{+} \PY{n}{T3}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{make\PYZus{}3d\PYZus{}plot}\PY{p}{(}\PY{n}{xfinal}\PY{p}{,} \PY{n}{yfinal}\PY{p}{,} \PY{n}{zfinal}\PY{p}{,} \PY{n}{history}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{:}
+            \PY{n}{L1s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xfinal} \PY{o}{\PYZhy{}} \PY{l+m+mi}{10} \PY{p}{,} \PY{n}{xfinal} \PY{o}{+} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+            \PY{n}{L2s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{yfinal} \PY{o}{\PYZhy{}} \PY{l+m+mi}{10} \PY{p}{,} \PY{n}{yfinal} \PY{o}{+} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}
+            \PY{n}{L1}\PY{p}{,} \PY{n}{L2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{L1s}\PY{p}{,} \PY{n}{L1s}\PY{p}{)}
+            \PY{n}{zs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{loss}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{LAMBDA}\PY{p}{)} 
+                           \PY{k}{for} \PY{n}{LAMBDA} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{L1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{L2}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{n}{Z} \PY{o}{=} \PY{n}{zs}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{L1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{off} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{L1}\PY{p}{,} \PY{n}{L2}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{L1}\PY{p}{,} \PY{n}{L2}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{n}{off}\PY{p}{,} \PY{n}{stride}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lambda 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lambda 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Loss Function}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{view\PYZus{}init}\PY{p}{(}\PY{n}{elev}\PY{o}{=}\PY{l+m+mf}{30.}\PY{p}{,} \PY{n}{azim}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{xfinal}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{yfinal}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{zfinal}\PY{p}{]} \PY{p}{,} \PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{history}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{history}\PY{p}{]}\PY{p}{,} \PY{n}{loss} \PY{p}{,} \PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{;}
+            \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{history}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{t} \PY{o+ow}{in} \PY{n}{history}\PY{p}{]}\PY{p}{,} \PY{n}{off} \PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{markerfacecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markeredgecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+        \PY{k}{def} \PY{n+nf}{sa\PYZus{}plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{LAMBDA}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{history}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{loss}\PY{p}{,} \PY{n+nb}{list}\PY{p}{)}\PY{p}{:}
+                \PY{n}{loss} \PY{o}{=} \PY{p}{[}\PY{n}{loss}\PY{p}{]}
+            \PY{n}{make\PYZus{}3d\PYZus{}plot}\PY{p}{(}\PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{LAMBDA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{loss}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{history}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Proposal Function:}
+        \PY{n}{covNorm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        \PY{n}{pfxs} \PY{o}{=} \PY{k}{lambda} \PY{n}{mean}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{mean}\PY{p}{,} \PY{n}{covNorm}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Example:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pfxs}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Example: [ 0.11511539  1.24709003]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Temperature and iterations}
+        \PY{n}{tf} \PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.8}\PY{o}{*}\PY{n}{t} \PY{c+c1}{\PYZsh{}temperature function}
+        \PY{n}{itf} \PY{o}{=} \PY{k}{lambda} \PY{n}{length}\PY{p}{:} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{length}\PY{p}{)} \PY{c+c1}{\PYZsh{}iteration function}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{sa}\PY{p}{(}\PY{n}{energyfunc}\PY{p}{,} \PY{n}{initials}\PY{p}{,} \PY{n}{epochs}\PY{p}{,} \PY{n}{tempfunc}\PY{p}{,} \PY{n}{iterfunc}\PY{p}{,} \PY{n}{proposalfunc}\PY{p}{,} \PY{n}{opt\PYZus{}cond}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{accumulator}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+            \PY{n}{best\PYZus{}solution} \PY{o}{=} \PY{n}{old\PYZus{}solution} \PY{o}{=} \PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{T}\PY{o}{=}\PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{length}\PY{o}{=}\PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{best\PYZus{}energy} \PY{o}{=} \PY{n}{old\PYZus{}energy} \PY{o}{=} \PY{n}{energyfunc}\PY{p}{(}\PY{n}{old\PYZus{}solution}\PY{p}{)}
+            \PY{n}{accepted}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{n}{total}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{p}{)}
+                \PY{k}{if} \PY{n}{index} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{T} \PY{o}{=} \PY{n}{tempfunc}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+                    \PY{n}{length}\PY{o}{=}\PY{n}{iterfunc}\PY{p}{(}\PY{n}{length}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Temperature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{T}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{length}\PY{p}{)}
+                \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{total}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                    \PY{n}{new\PYZus{}solution} \PY{o}{=} \PY{n}{proposalfunc}\PY{p}{(}\PY{n}{old\PYZus{}solution}\PY{p}{)}
+                    \PY{n}{new\PYZus{}energy} \PY{o}{=} \PY{n}{energyfunc}\PY{p}{(}\PY{n}{new\PYZus{}solution}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} Use a min here as you could get a \PYZdq{}probability\PYZdq{} \PYZgt{} 1}
+                    \PY{n}{alpha} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{old\PYZus{}energy} \PY{o}{\PYZhy{}} \PY{n}{new\PYZus{}energy}\PY{p}{)}\PY{o}{/}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{if} \PY{p}{(}\PY{p}{(}\PY{n}{new\PYZus{}energy} \PY{o}{\PYZlt{}} \PY{n}{old\PYZus{}energy}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{} Accept proposed solution}
+                        \PY{n}{accepted}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                        \PY{n}{accumulator}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{T}\PY{p}{,} \PY{n}{new\PYZus{}solution}\PY{p}{,} \PY{n}{new\PYZus{}energy}\PY{p}{)}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{new\PYZus{}energy} \PY{o}{\PYZlt{}} \PY{n}{best\PYZus{}energy}\PY{p}{:}
+                            \PY{c+c1}{\PYZsh{} Replace previous best with this one}
+                            \PY{n}{best\PYZus{}energy} \PY{o}{=} \PY{n}{new\PYZus{}energy}
+                            \PY{n}{best\PYZus{}solution} \PY{o}{=} \PY{n}{new\PYZus{}solution}
+                            \PY{n}{best\PYZus{}index}\PY{o}{=}\PY{n}{total}
+                            \PY{n}{best\PYZus{}temp}\PY{o}{=}\PY{n}{T}
+                        \PY{n}{old\PYZus{}energy} \PY{o}{=} \PY{n}{new\PYZus{}energy}
+                        \PY{n}{old\PYZus{}solution} \PY{o}{=} \PY{n}{new\PYZus{}solution}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{c+c1}{\PYZsh{} Keep the old stuff}
+                        \PY{n}{accumulator}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{T}\PY{p}{,} \PY{n}{old\PYZus{}solution}\PY{p}{,} \PY{n}{old\PYZus{}energy}\PY{p}{)}\PY{p}{)}
+            
+            \PY{n}{best\PYZus{}meta}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{best\PYZus{}index}\PY{p}{,} \PY{n}{temp}\PY{o}{=}\PY{n}{best\PYZus{}temp}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{frac accepted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accepted}\PY{o}{/}\PY{n}{total}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total iterations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{total}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bmeta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{best\PYZus{}meta}\PY{p}{)}
+            \PY{k}{return} \PY{n}{best\PYZus{}meta}\PY{p}{,} \PY{n}{best\PYZus{}solution}\PY{p}{,} \PY{n}{best\PYZus{}energy}\PY{p}{,} \PY{n}{accumulator}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{loss\PYZus{}lam} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{loss}\PY{p}{,}\PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{my\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+        \PY{n}{inits}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{solution}\PY{o}{=}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Run the SA algorithm}
+        \PY{n}{bmeta}\PY{p}{,} \PY{n}{bs}\PY{p}{,} \PY{n}{be}\PY{p}{,} \PY{n}{out} \PY{o}{=} \PY{n}{sa}\PY{p}{(}\PY{n}{loss\PYZus{}lam}\PY{p}{,} \PY{n}{inits}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n}{tf}\PY{p}{,} \PY{n}{itf}\PY{p}{,} \PY{n}{pfxs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 0
+Temperature 100 Length 100
+Epoch 1
+Temperature 80.0 Length 120
+Epoch 2
+Temperature 64.0 Length 144
+Epoch 3
+Temperature 51.2 Length 173
+Epoch 4
+Temperature 40.96000000000001 Length 208
+Epoch 5
+Temperature 32.76800000000001 Length 250
+Epoch 6
+Temperature 26.21440000000001 Length 300
+Epoch 7
+Temperature 20.97152000000001 Length 360
+Epoch 8
+Temperature 16.777216000000006 Length 432
+Epoch 9
+Temperature 13.421772800000006 Length 519
+Epoch 10
+Temperature 10.737418240000006 Length 623
+Epoch 11
+Temperature 8.589934592000004 Length 748
+Epoch 12
+Temperature 6.871947673600004 Length 898
+Epoch 13
+Temperature 5.497558138880003 Length 1078
+Epoch 14
+Temperature 4.398046511104003 Length 1294
+Epoch 15
+Temperature 3.5184372088832023 Length 1553
+Epoch 16
+Temperature 2.814749767106562 Length 1864
+Epoch 17
+Temperature 2.25179981368525 Length 2237
+Epoch 18
+Temperature 1.8014398509482001 Length 2685
+Epoch 19
+Temperature 1.4411518807585602 Length 3222
+Epoch 20
+Temperature 1.1529215046068482 Length 3867
+Epoch 21
+Temperature 0.9223372036854786 Length 4641
+Epoch 22
+Temperature 0.7378697629483829 Length 5570
+Epoch 23
+Temperature 0.5902958103587064 Length 6684
+Epoch 24
+Temperature 0.4722366482869651 Length 8021
+Epoch 25
+Temperature 0.3777893186295721 Length 9626
+Epoch 26
+Temperature 0.3022314549036577 Length 11552
+Epoch 27
+Temperature 0.24178516392292618 Length 13863
+Epoch 28
+Temperature 0.19342813113834095 Length 16636
+Epoch 29
+Temperature 0.15474250491067276 Length 19964
+frac accepted 0.227145397208803 total iterations 119232 bmeta \{'index': 35873, 'temp': 0.5902958103587064\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Print out results:}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Global Minimum Suggestion:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{bs}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{With Loss Function:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{be}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Global Minimum Suggestion: [  2.05281771e+00  -1.70592608e-03] 
+With Loss Function: -9.93409762445
+
+    \end{Verbatim}
+
+    \subsubsection{Now, plot the process}\label{now-plot-the-process}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Create plots of the energy (cost) and the temperature over iterations}
+        \PY{n}{accum\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{out}\PY{p}{)}\PY{p}{)}
+        \PY{n}{T} \PY{o}{=} \PY{n}{accum\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{LAM} \PY{o}{=} \PY{n}{accum\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{E} \PY{o}{=} \PY{n}{accum\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plotting energy function}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{E}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy Function}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy Function Over Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Plotting temperature}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature Over Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Plotting temperature}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{T}\PY{p}{,}\PY{n}{E}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy Function}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy Function Computations at Each Temperature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}xaxis}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Compare to Gradient Descent and
+SGD:}\label{compare-to-gradient-descent-and-sgd}
+
+When we compare this implementation to GD and SGD, we notice a few
+things. First, we see that the suggested global minimum is indeed the
+global minimum. This beats the attempts made by GD and SGD to compute
+minima, as they both got stuck in local minima. Second, one of the
+requirements of an annealing algorithm is that we have to be able to
+access all of the locations on our parameter space. This is similar to
+trio of aperiodicity, irreducibility, and recurrence that we demanded in
+Markov Chain construction. In order to ensure that we have reached the
+global minimum, we must meet the condition that we have to be able to
+access all of these locations. At each temperature, the system acts like
+a Markov Chain where there is a set probability to transition from one
+state to any other. This defines our Markov transition probabilities.
+
+    \subsection{Problem 2: A Tired
+Salesman}\label{problem-2-a-tired-salesman}
+
+In the famous traveling salesman problem, the quality of the solution
+can be measured in different ways, beyond finding the shortest path. For
+example, the total time of travel may also be important, and may depend
+on the means of transportation that connect pairs of cities. Consider a
+random distribution of \(N\) points on a plane representing the cities
+that must be visited by the traveling salesman. Each point is an (x,y)
+coordinate where both x and y are integers in the range {[}1, 50).
+Assign a value \(s_i\) where \(i\in [1,\dots,N]\) to each city that
+represents its size measured by population. Let
+\(\forall s_i, \  s_i \in [1, 10)\). If two cities are farther away from
+each other than a \textbf{distance threshold of 10} and both have
+populations greater than a \textbf{population threshold of 5} assume
+there is a flight connection between them. In all other cases assume
+that our poor salesman would have to drive between cities. Flying is
+faster than driving by a factor of 10.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Use Simulated Annealing to find solutions to the traveling salesman
+  problem for \(N=100\), optimizing the travel path for the total
+  distance travelled (but keeping track of the time of travel).
+\item
+  Now redo the problem by optimizing the the path for the total time of
+  travel (but keeping track of the distance traveled). Are the two
+  solutions similar or different?
+\item
+  How do your results change if the population and distance thresholds
+  for the exisitence of a flight between two cities are altered?
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Functions to get the permutations of the tours}
+         \PY{k}{def} \PY{n+nf}{alltours}\PY{p}{(}\PY{n}{cities}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Return a list of tours, each a permutation of cities, but each one starting with the same city.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{start} \PY{o}{=} \PY{n}{first}\PY{p}{(}\PY{n}{cities}\PY{p}{)}
+             \PY{k}{return} \PY{p}{[}\PY{p}{[}\PY{n}{start}\PY{p}{]} \PY{o}{+} \PY{n}{Tour}\PY{p}{(}\PY{n}{rest}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{rest} \PY{o+ow}{in} \PY{n}{itertools}\PY{o}{.}\PY{n}{permutations}\PY{p}{(}\PY{n}{cities} \PY{o}{\PYZhy{}} \PY{p}{\PYZob{}}\PY{n}{start}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Gets the first city of a collection}
+         \PY{k}{def} \PY{n+nf}{first}\PY{p}{(}\PY{n}{collection}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Start iterating over collection, and return the first element.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{return} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{collection}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{Tour} \PY{o}{=} \PY{n+nb}{list}  \PY{c+c1}{\PYZsh{} Tours are implemented as lists of cities}
+         
+         \PY{c+c1}{\PYZsh{} Function to get the length of the tour}
+         \PY{k}{def} \PY{n+nf}{tour\PYZus{}length}\PY{p}{(}\PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{,} \PY{n}{tour}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The total of distances between each pair of consecutive cities in the tour.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{tour\PYZus{}dist}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{tour\PYZus{}time}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tour\PYZus{}dist\PYZus{}new}\PY{p}{,} \PY{n}{tour\PYZus{}time\PYZus{}new} \PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{tour}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{tour}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+                 \PY{n}{tour\PYZus{}dist}\PY{o}{+}\PY{o}{=}\PY{n}{tour\PYZus{}dist\PYZus{}new}
+                 \PY{n}{tour\PYZus{}time}\PY{o}{+}\PY{o}{=}\PY{n}{tour\PYZus{}time\PYZus{}new}
+                 
+             \PY{k}{return} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{tour\PYZus{}dist}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{tour\PYZus{}time}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Cities are represented as Points, which are a subclass of complex numbers}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{namedtuple}
+         
+         \PY{c+c1}{\PYZsh{} City is a named tuple with x and y position and a population}
+         \PY{n}{City} \PY{o}{=} \PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Get the distance between two cities}
+         \PY{k}{def} \PY{n+nf}{distance}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} Note: we have modified this function to reflect the complexity of the problem}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The distance between two cites.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{euc\PYZus{}dist} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{B}\PY{o}{.}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{B}\PY{o}{.}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{B}\PY{o}{.}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{B}\PY{o}{.}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Convert distance to a time}
+             \PY{k}{if} \PY{p}{(}\PY{n}{euc\PYZus{}dist} \PY{o}{\PYZgt{}} \PY{n}{threshD}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{pop} \PY{o}{\PYZgt{}} \PY{n}{threshP}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{B}\PY{o}{.}\PY{n}{pop} \PY{o}{\PYZgt{}} \PY{n}{threshP}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{time} \PY{o}{=} \PY{n}{euc\PYZus{}dist} \PY{o}{/} \PY{l+m+mi}{10}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{time} \PY{o}{=} \PY{n}{euc\PYZus{}dist}
+             \PY{k}{return}\PY{p}{(}\PY{n}{euc\PYZus{}dist}\PY{p}{,} \PY{n}{time}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{Cities}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{600}\PY{p}{,} \PY{n}{popmax}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Make a set of n cities, each with random coordinates within a (width x height) rectangle.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed} \PY{o}{*} \PY{n}{n}\PY{p}{)}
+             \PY{k}{return} \PY{n+nb}{frozenset}\PY{p}{(}\PY{n}{City}\PY{p}{(}\PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{width}\PY{p}{)}\PY{p}{,} \PY{n}{random}\PY{o}{.}\PY{n}{randrange}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{height}\PY{p}{)}\PY{p}{,} \PY{n}{popmax}\PY{o}{*}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                              \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}tour}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot the cities as circles and the tour as lines between them. Start city is red square.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{start} \PY{o}{=} \PY{n}{tour}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{plot\PYZus{}lines}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tour}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{n}{start}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plot\PYZus{}lines}\PY{p}{(}\PY{p}{[}\PY{n}{start}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Mark the start city with a red square}
+             
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}lines}\PY{p}{(}\PY{n}{points}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bo\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Plot lines to connect a series of points.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{p}\PY{o}{.}\PY{n}{x} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{points}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{p}\PY{o}{.}\PY{n}{y} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{points}\PY{p}{]}\PY{p}{,} \PY{n}{style}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scaled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}tsp}\PY{p}{(}\PY{n}{algorithm}\PY{p}{,} \PY{n}{cities}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Apply a TSP algorithm to cities, plot the resulting tour, and print information.}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{tour\PYZus{}length\PYZus{}partial} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{tour\PYZus{}length}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Find the solution and time how long it takes}
+             \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tour} \PY{o}{=} \PY{n}{algorithm}\PY{p}{(}\PY{n}{cities}\PY{p}{)}
+             \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+             \PY{k}{assert} \PY{n}{valid\PYZus{}tour}\PY{p}{(}\PY{n}{tour}\PY{p}{,} \PY{n}{cities}\PY{p}{)}
+             \PY{n}{plot\PYZus{}tour}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ city tour with length }\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+s2}{ and time }\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZdq{}}
+                   \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{,} \PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{(}\PY{n}{tour}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         \PY{k}{def} \PY{n+nf}{valid\PYZus{}tour}\PY{p}{(}\PY{n}{tour}\PY{p}{,} \PY{n}{cities}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Is tour a valid tour for these cities?}\PY{l+s+s2}{\PYZdq{}}
+             \PY{k}{return} \PY{n+nb}{set}\PY{p}{(}\PY{n}{tour}\PY{p}{)} \PY{o}{==} \PY{n+nb}{set}\PY{p}{(}\PY{n}{cities}\PY{p}{)} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tour}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cities}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Create list of cities}
+         \PY{n}{mycities} \PY{o}{=} \PY{n}{Cities}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{332}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{height}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{popmax}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plot\PYZus{}lines}\PY{p}{(}\PY{n}{mycities}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{change\PYZus{}tour}\PY{p}{(}\PY{n}{input\PYZus{}tour}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Change a tour for tsp iteration}\PY{l+s+s2}{\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}possible\PYZus{}indices = range(1, len(input\PYZus{}tour)) why not?}
+             \PY{n}{possible\PYZus{}indices} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{input\PYZus{}tour}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} take two random indices to swap}
+             \PY{n}{c1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{possible\PYZus{}indices}\PY{p}{)}
+             \PY{n}{c2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{possible\PYZus{}indices}\PY{p}{)}
+             
+             \PY{n}{new\PYZus{}tour} \PY{o}{=} \PY{n}{change\PYZus{}path}\PY{p}{(}\PY{n}{input\PYZus{}tour}\PY{p}{,} \PY{n}{c1}\PY{p}{,} \PY{n}{c2}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{new\PYZus{}tour}
+         
+         \PY{k}{def} \PY{n+nf}{swap\PYZus{}cities}\PY{p}{(}\PY{n}{input\PYZus{}tour}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Swap two cities at index i and j in a tour}\PY{l+s+s2}{\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} save city1}
+             \PY{n}{city1} \PY{o}{=} \PY{n}{input\PYZus{}tour}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} save city2}
+             \PY{n}{city2} \PY{o}{=} \PY{n}{input\PYZus{}tour}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+             
+             \PY{n}{new\PYZus{}tour} \PY{o}{=} \PY{n}{input\PYZus{}tour}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} swap}
+             \PY{n}{new\PYZus{}tour}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{city1}
+             \PY{n}{new\PYZus{}tour}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{city2}
+                 
+             \PY{k}{return} \PY{n}{new\PYZus{}tour}
+             
+         \PY{n}{change\PYZus{}path} \PY{o}{=} \PY{n}{swap\PYZus{}cities}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}optimization}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Plot the results of the optimization routine}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+         
+             \PY{n}{lns1} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{out}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{lns2} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{n}{e}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n}{out}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} added these two lines}
+             \PY{n}{lns} \PY{o}{=} \PY{n}{lns1}\PY{o}{+}\PY{n}{lns2}
+             \PY{n}{labs} \PY{o}{=} \PY{p}{[}\PY{n}{l}\PY{o}{.}\PY{n}{get\PYZus{}label}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{lns}\PY{p}{]}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{lns}\PY{p}{,} \PY{n}{labs}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Plot result}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trip Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trip Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xscale}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{sa\PYZus{}tsp}\PY{p}{(}\PY{n}{energyfunc}\PY{p}{,} \PY{n}{initials}\PY{p}{,} \PY{n}{epochs}\PY{p}{,} \PY{n}{tempfunc}\PY{p}{,} \PY{n}{iterfunc}\PY{p}{,} \PY{n}{proposalfunc}\PY{p}{,} \PY{n}{OC}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{accumulator}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{n}{best\PYZus{}solution} \PY{o}{=} \PY{n}{old\PYZus{}solution} \PY{o}{=} \PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{T}\PY{o}{=}\PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{length}\PY{o}{=}\PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} Reannealing}
+             \PY{n}{ANN\PYZus{}INT} \PY{o}{=} \PY{l+m+mi}{100}
+             \PY{n}{beta} \PY{o}{=} \PY{l+m+mf}{1.5}
+             
+             \PY{n}{best\PYZus{}energy} \PY{o}{=} \PY{n}{old\PYZus{}energy} \PY{o}{=} \PY{n}{energyfunc}\PY{p}{(}\PY{n}{old\PYZus{}solution}\PY{p}{)}
+             \PY{n}{accepted}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{total}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{tnrange}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZpc{}} \PY{n}{ANN\PYZus{}INT} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} \PY{c+c1}{\PYZsh{} Reannealing}
+                     \PY{n}{T} \PY{o}{=} \PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{T}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{index}\PY{o}{/}\PY{n}{epochs}\PY{p}{)}
+                     \PY{n}{length} \PY{o}{=} \PY{n}{initials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                     \PY{n}{ANN\PYZus{}INT} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{beta}\PY{o}{*}\PY{n}{ANN\PYZus{}INT}\PY{p}{)}
+                     \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch=}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{, Reannealing...}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{index}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{index} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{T} \PY{o}{=} \PY{n}{tempfunc}\PY{p}{(}\PY{n}{T}\PY{p}{)}
+                     \PY{n}{length}\PY{o}{=}\PY{n}{iterfunc}\PY{p}{(}\PY{n}{length}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{total}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                     \PY{n}{new\PYZus{}solution} \PY{o}{=} \PY{n}{proposalfunc}\PY{p}{(}\PY{n}{old\PYZus{}solution}\PY{p}{)}
+                     \PY{n}{new\PYZus{}energy} \PY{o}{=} \PY{n}{energyfunc}\PY{p}{(}\PY{n}{new\PYZus{}solution}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} Use a min here as you could get a \PYZdq{}probability\PYZdq{} \PYZgt{} 1}
+                     \PY{n}{alpha} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{old\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{new\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{T}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{p}{(}\PY{n}{new\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{old\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{} Accept proposed solution}
+                         \PY{n}{accepted}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                         \PY{n}{accumulator}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{T}\PY{p}{,} \PY{n}{new\PYZus{}solution}\PY{p}{,} \PY{n}{new\PYZus{}energy}\PY{p}{)}\PY{p}{)}
+                         \PY{k}{if} \PY{n}{new\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{best\PYZus{}energy}\PY{p}{[}\PY{n}{OC}\PY{p}{]}\PY{p}{:}
+                             \PY{c+c1}{\PYZsh{} Replace previous best with this one}
+                             \PY{n}{best\PYZus{}energy} \PY{o}{=} \PY{n}{new\PYZus{}energy}
+                             \PY{n}{best\PYZus{}solution} \PY{o}{=} \PY{n}{new\PYZus{}solution}
+                             \PY{n}{best\PYZus{}index}\PY{o}{=}\PY{n}{total}
+                             \PY{n}{best\PYZus{}temp}\PY{o}{=}\PY{n}{T}
+                         \PY{n}{old\PYZus{}energy} \PY{o}{=} \PY{n}{new\PYZus{}energy}
+                         \PY{n}{old\PYZus{}solution} \PY{o}{=} \PY{n}{new\PYZus{}solution}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{c+c1}{\PYZsh{} Keep the old stuff}
+                         \PY{n}{accumulator}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{T}\PY{p}{,} \PY{n}{old\PYZus{}solution}\PY{p}{,} \PY{n}{old\PYZus{}energy}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{best\PYZus{}meta}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n}{best\PYZus{}index}\PY{p}{,} \PY{n}{temp}\PY{o}{=}\PY{n}{best\PYZus{}temp}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RESULTS:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Frac accepted: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Total Iterations: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Best Meta \PYZhy{} Index=}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{, Temp=}\PY{l+s+si}{\PYZpc{}.4e}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}
+                   \PY{p}{(}\PY{n}{accepted}\PY{o}{/}\PY{n}{total}\PY{p}{,} \PY{n}{total}\PY{p}{,} \PY{n}{best\PYZus{}meta}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{best\PYZus{}meta}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{temp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{best\PYZus{}meta}\PY{p}{,} \PY{n}{best\PYZus{}solution}\PY{p}{,} \PY{n}{best\PYZus{}energy}\PY{p}{,} \PY{n}{accumulator}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Initialize functions}
+         \PY{n}{initial\PYZus{}tour} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{mycities}\PY{p}{)}
+         \PY{n}{length\PYZus{}func1} \PY{o}{=} \PY{k}{lambda} \PY{n}{temperature}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{temperature}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{length\PYZus{}func2} \PY{o}{=} \PY{k}{lambda} \PY{n}{length}\PY{p}{:} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{length}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{length\PYZus{}func} \PY{o}{=} \PY{n}{length\PYZus{}func2}
+         \PY{n}{temp\PYZus{}func} \PY{o}{=} \PY{k}{lambda} \PY{n}{t}\PY{p}{:} \PY{l+m+mf}{0.94}\PY{o}{*}\PY{n}{t}
+         
+         \PY{c+c1}{\PYZsh{} Initialize state}
+         \PY{n}{init\PYZus{}length} \PY{o}{=} \PY{n}{length\PYZus{}func}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{inits}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{solution}\PY{o}{=}\PY{n}{initial\PYZus{}tour}\PY{p}{,} \PY{n}{length}\PY{o}{=}\PY{n}{init\PYZus{}length}\PY{p}{,} \PY{n}{T}\PY{o}{=}\PY{l+m+mf}{50.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Optimizing for Tour
+Distance:}\label{optimizing-for-tour-distance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Run annealing algorithm}
+         \PY{n}{threshD} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{threshP} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{tour\PYZus{}length\PYZus{}partial} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{tour\PYZus{}length}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+         \PY{n}{opt\PYZus{}cond} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bmeta}\PY{p}{,} \PY{n}{bs}\PY{p}{,} \PY{n}{be}\PY{p}{,} \PY{n}{out} \PY{o}{=} \PY{n}{sa\PYZus{}tsp}\PY{p}{(}\PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{,} \PY{n}{inits}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{temp\PYZus{}func}\PY{p}{,} \PY{n}{length\PYZus{}func}\PY{p}{,} \PY{n}{change\PYZus{}tour}\PY{p}{,} \PY{n}{OC}\PY{o}{=}\PY{n}{opt\PYZus{}cond}\PY{p}{)}\PY{p}{;}
+         \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algorithm Time:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{t1}\PY{o}{\PYZhy{}}\PY{n}{t0}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:32: RuntimeWarning: overflow encountered in exp
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0389
+Total Iterations: 196402
+Best Meta - Index=76860, Temp=1.0216e-07
+Algorithm Time: 42.65616899999999
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{plot\PYZus{}tsp}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{bs}\PY{p}{,} \PY{n}{mycities}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+         \PY{n}{plot\PYZus{}optimization}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+100 city tour with length 559.7 and time 532.406s
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Optimizing for Tour
+Time:}\label{optimizing-for-tour-time}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Run annealing algorithm}
+         \PY{n}{threshD} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{threshP} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{tour\PYZus{}length\PYZus{}partial} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{tour\PYZus{}length}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+         \PY{n}{opt\PYZus{}cond} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{t0} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bmeta}\PY{p}{,} \PY{n}{bs}\PY{p}{,} \PY{n}{be}\PY{p}{,} \PY{n}{out} \PY{o}{=} \PY{n}{sa\PYZus{}tsp}\PY{p}{(}\PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{,} \PY{n}{inits}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{temp\PYZus{}func}\PY{p}{,} \PY{n}{length\PYZus{}func}\PY{p}{,} \PY{n}{change\PYZus{}tour}\PY{p}{,} \PY{n}{OC}\PY{o}{=}\PY{n}{opt\PYZus{}cond}\PY{p}{)}\PY{p}{;}
+         \PY{n}{t1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algorithm Time:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{t1}\PY{o}{\PYZhy{}}\PY{n}{t0}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:32: RuntimeWarning: overflow encountered in exp
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0481
+Total Iterations: 196402
+Best Meta - Index=76219, Temp=1.4809e-07
+Algorithm Time: 42.062062
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plot\PYZus{}tsp}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{bs}\PY{p}{,} \PY{n}{mycities}\PY{p}{,} \PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+         \PY{n}{plot\PYZus{}optimization}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+100 city tour with length 1044.8 and time 369.985s
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    After performing the annealing algorithm to optimize tour time and tour
+distance, we see that the results are quite different. In this
+particular iteration, we see that performing the optimization for
+distance led to a lower distance and a higher time when compared to the
+optimization for time. This is to be expected given our conditions for
+maximization.
+
+    \subsubsection{Trying different threshold
+conditions}\label{trying-different-threshold-conditions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{threshD} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{]}
+         \PY{n}{threshP} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}
+         \PY{n}{Dmesh}\PY{p}{,} \PY{n}{Pmesh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{threshD}\PY{p}{,} \PY{n}{threshP}\PY{p}{)}
+         \PY{n}{be\PYZus{}d\PYZus{}dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{Dmesh}\PY{p}{)}\PY{p}{)}
+         \PY{n}{be\PYZus{}d\PYZus{}time} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{Dmesh}\PY{p}{)}\PY{p}{)}
+         \PY{n}{be\PYZus{}t\PYZus{}dist} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{Dmesh}\PY{p}{)}\PY{p}{)}
+         \PY{n}{be\PYZus{}t\PYZus{}time} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{Dmesh}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c+c1}{\PYZsh{} Run annealing algorithm over a grid of parameters optimizing for distance}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{threshDval} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{threshD}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{threshPval} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{threshP}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tour\PYZus{}length\PYZus{}partial} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{tour\PYZus{}length}\PY{p}{,} \PY{n}{threshDval}\PY{p}{,} \PY{n}{threshPval}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Optimize for distance}
+                 \PY{n}{opt\PYZus{}cond} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{bmeta\PYZus{}d}\PY{p}{,} \PY{n}{bs\PYZus{}d}\PY{p}{,} \PY{n}{be\PYZus{}d}\PY{p}{,} \PY{n}{out\PYZus{}d} \PY{o}{=} \PY{n}{sa\PYZus{}tsp}\PY{p}{(}\PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{,} \PY{n}{inits}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} 
+                                                     \PY{n}{temp\PYZus{}func}\PY{p}{,} \PY{n}{length\PYZus{}func}\PY{p}{,} \PY{n}{change\PYZus{}tour}\PY{p}{,} \PY{n}{OC} \PY{o}{=} \PY{n}{opt\PYZus{}cond}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{be\PYZus{}d\PYZus{}dist}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{be\PYZus{}d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{be\PYZus{}d\PYZus{}time}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{be\PYZus{}d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{} Optimize for time}
+                 \PY{n}{opt\PYZus{}cond} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{bmeta\PYZus{}t}\PY{p}{,} \PY{n}{bs\PYZus{}t}\PY{p}{,} \PY{n}{be\PYZus{}t}\PY{p}{,} \PY{n}{out\PYZus{}t} \PY{o}{=} \PY{n}{sa\PYZus{}tsp}\PY{p}{(}\PY{n}{tour\PYZus{}length\PYZus{}partial}\PY{p}{,} \PY{n}{inits}\PY{p}{,} \PY{l+m+mi}{2000}\PY{p}{,} 
+                                                     \PY{n}{temp\PYZus{}func}\PY{p}{,} \PY{n}{length\PYZus{}func}\PY{p}{,} \PY{n}{change\PYZus{}tour}\PY{p}{,} \PY{n}{OC} \PY{o}{=} \PY{n}{opt\PYZus{}cond}\PY{p}{)}\PY{p}{;}
+                 \PY{n}{be\PYZus{}t\PYZus{}dist}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{be\PYZus{}t}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{be\PYZus{}t\PYZus{}time}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{be\PYZus{}t}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:32: RuntimeWarning: overflow encountered in exp
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0384
+Total Iterations: 196402
+Best Meta - Index=160473, Temp=3.7867e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0684
+Total Iterations: 196402
+Best Meta - Index=45203, Temp=4.7382e-05
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0388
+Total Iterations: 196402
+Best Meta - Index=160812, Temp=2.9564e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0488
+Total Iterations: 196402
+Best Meta - Index=162269, Temp=1.2432e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0387
+Total Iterations: 196402
+Best Meta - Index=169677, Temp=1.2765e-10
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0378
+Total Iterations: 196402
+Best Meta - Index=160106, Temp=4.5590e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0394
+Total Iterations: 196402
+Best Meta - Index=44635, Temp=6.8682e-05
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0650
+Total Iterations: 196402
+Best Meta - Index=78026, Temp=4.8620e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0382
+Total Iterations: 196402
+Best Meta - Index=153614, Temp=2.5443e-06
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0470
+Total Iterations: 196402
+Best Meta - Index=156223, Temp=5.0920e-07
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0384
+Total Iterations: 196402
+Best Meta - Index=181008, Temp=1.1030e-13
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0387
+Total Iterations: 196402
+Best Meta - Index=158278, Temp=1.4772e-07
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0379
+Total Iterations: 196402
+Best Meta - Index=160948, Temp=2.7790e-08
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0588
+Total Iterations: 196402
+Best Meta - Index=73467, Temp=8.3740e-07
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0390
+Total Iterations: 196402
+Best Meta - Index=175875, Temp=2.7539e-12
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0447
+Total Iterations: 196402
+Best Meta - Index=44788, Temp=6.0687e-05
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0388
+Total Iterations: 196402
+Best Meta - Index=181992, Temp=6.3204e-14
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, max=2000), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch=99, Reannealing{\ldots}
+Epoch=249, Reannealing{\ldots}
+Epoch=474, Reannealing{\ldots}
+Epoch=812, Reannealing{\ldots}
+Epoch=1319, Reannealing{\ldots}
+
+RESULTS:
+Frac accepted: 0.0377
+Total Iterations: 196402
+Best Meta - Index=78759, Temp=3.1529e-08
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{be\PYZus{}t\PYZus{}time}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{be\PYZus{}d\PYZus{}time}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 245.43067721  358.77818589  458.37294333]
+ [ 278.94696319  358.41195025  458.80409411]
+ [ 320.67367795  376.57929458  510.03173955]]
+[[ 365.33370241  483.22866319  614.56501256]
+ [ 476.59117446  519.26436637  559.78574084]
+ [ 540.81888888  560.48251898  585.70566413]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot distance for optimizing distance}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{be\PYZus{}d\PYZus{}dist}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{xticklabels}\PY{o}{=}\PY{n}{threshD}\PY{p}{,} \PY{n}{yticklabels}\PY{o}{=}\PY{n}{threshP}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance For Optimizing Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot time for optimizing distance}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{be\PYZus{}d\PYZus{}time}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{xticklabels}\PY{o}{=}\PY{n}{threshD}\PY{p}{,} \PY{n}{yticklabels}\PY{o}{=}\PY{n}{threshP}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time For Optimizing Distance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot distance for optimizing time}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{be\PYZus{}t\PYZus{}dist}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{xticklabels}\PY{o}{=}\PY{n}{threshD}\PY{p}{,} \PY{n}{yticklabels}\PY{o}{=}\PY{n}{threshP}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance For Optimizing Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot time for optimizing time}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{be\PYZus{}t\PYZus{}time}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{xticklabels}\PY{o}{=}\PY{n}{threshD}\PY{p}{,} \PY{n}{yticklabels}\PY{o}{=}\PY{n}{threshP}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distance Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population Threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time For Optimizing Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Above we show a heatmap of the results of the four different
+optimization combinations, showing distance and time for each
+optimization condition. We would expect that a change in population
+threshold should not impact the result of the distance output in the
+distance optimization, so long as the algorithm had enough time to
+converge to a suitable minimum. This is because our optimization was
+over distance and paid no attention to the time. The reverse is sometime
+true in the case of time output in optimizing over time, but the
+distance is correlated with the time, so we should not expect the exact
+same behavior. These are validated in the above figures.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
