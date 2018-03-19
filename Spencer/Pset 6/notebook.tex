@@ -1,0 +1,1439 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Hallyburton\_Pset\_6}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Spencer Hallyburton}\label{spencer-hallyburton}
+
+\subsection{Collaborator: Salvador
+Barragan}\label{collaborator-salvador-barragan}
+
+\subsection{APMTH 207: Advanced Scientific
+Computing:}\label{apmth-207-advanced-scientific-computing}
+
+\subsection{Homework \#6}\label{homework-6}
+
+\textbf{Harvard University} \textbf{Spring 2018} \textbf{Instructors:
+Rahul Dave} \textbf{Due Date: } Friday, March 9th, 2018 at 11:00am
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}
+        \PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k}{import} \PY{n}{permutation}
+        \PY{k+kn}{import} \PY{n+nn}{tqdm}
+        \PY{k+kn}{import} \PY{n+nn}{functools}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{cm}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{ticker} \PY{k}{import} \PY{n}{LinearLocator}\PY{p}{,} \PY{n}{FormatStrFormatter}
+        \PY{k+kn}{from} \PY{n+nn}{operator} \PY{k}{import} \PY{n}{add}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+\end{Verbatim}
+
+
+    \subsection{Problem 1: Metropolis and
+Chill}\label{problem-1-metropolis-and-chill}
+
+Suppose we ask you to memorize the order of the top five movies on IMDB.
+When we quiz you on the order afterwards, you might not recall the
+correct order, but the mistakes you will tend to make in your recall can
+be modeled by simple probabilistic models.
+
+Let's say that the top five movies are:\\
+1. \emph{The Shawshank Redemption} 2. \emph{The Godfather} 3.
+\emph{Wonder Woman} 4. \emph{Black Panther} 5. \emph{Pulp Fiction}
+
+Let's represent this ordering by the vector \(\omega = (1,2,3,4,5)\).
+
+If you were to mistakenly recall the top five movies as: 2. \emph{The
+Godfather} 3. \emph{Wonder Woman} 5. \emph{Pulp Fiction} 4. \emph{Black
+Panther} 1. \emph{The Shawshank Redemption}
+
+We'd represent your answer by the vector \(\theta = (2,3,5,4,1)\).
+
+Now, we have a way of quantifying how wrong your answer can be. We
+define the Hamming distance between two top five rankings,
+\(\theta, \omega\), as follows:
+\[d(\theta, \omega) = \sum_{i=1}^5 \mathbb{I}_{\theta_i\neq \omega_i},\]
+where \(\mathbb{I}_{\theta_i\neq \omega_i}\) is the indicator function
+that returns 1 if \(\theta_i\neq \omega_i\), and 0 otherwise.
+
+For example, the Hamming distance between your answer and the correct
+answer is \(d(\theta, \omega)=4\), because you only ranked \emph{Black
+Panther} in both answers correctly.
+
+Finally, let's suppose that the probability of giving a particular
+answer (expressed as \(\theta\)) is modeled as
+\[ p(\theta \,|\, \omega, \lambda) \propto  e^{-\lambda\, d(\theta,\, \omega)}.\]
+
+\subsubsection{Part A:}\label{part-a}
+
+Implement an Metropolis algorithm to produce sample guesses from 500
+individuals, with various \(\lambda\) values, \(\lambda=0.2, 0.5, 1.0\).
+What are the top five possible guesses?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Define hamming distance:}
+        \PY{k}{def} \PY{n+nf}{dhamm}\PY{p}{(}\PY{n}{omega}\PY{p}{,} \PY{n}{theta}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{scipy}\PY{o}{.}\PY{n}{not\PYZus{}equal}\PY{p}{(}\PY{n}{omega}\PY{p}{,}\PY{n}{theta}\PY{p}{)}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} Define probability of a particular guess:}
+        \PY{k}{def} \PY{n+nf}{p\PYZus{}guess}\PY{p}{(}\PY{n}{lam}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{omega}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{lam}\PY{o}{*}\PY{n}{dhamm}\PY{p}{(}\PY{n}{omega}\PY{p}{,}\PY{n}{theta}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define metropolis algorithm:}
+        \PY{k}{def} \PY{n+nf}{metropolis}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{qdraw}\PY{p}{,} \PY{n}{nsamp}\PY{p}{,} \PY{n}{xinit}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}samples = np.empty(nsamp)}
+            \PY{n}{samples} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{naccept} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{x\PYZus{}prev} \PY{o}{=} \PY{n}{xinit}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{o}{.}\PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nsamp}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x\PYZus{}star} \PY{o}{=} \PY{n}{qdraw}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{)}
+                \PY{n}{p\PYZus{}star} \PY{o}{=} \PY{n}{p}\PY{p}{(}\PY{n}{x\PYZus{}star}\PY{p}{)}
+                \PY{n}{p\PYZus{}prev} \PY{o}{=} \PY{n}{p}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{)}
+                \PY{n}{pdfratio} \PY{o}{=} \PY{n}{p\PYZus{}star}\PY{o}{/}\PY{n}{p\PYZus{}prev}
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb}{min}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{pdfratio}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{samples}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{x\PYZus{}star}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{x\PYZus{}prev} \PY{o}{=} \PY{n}{x\PYZus{}star}
+                    \PY{n}{naccept} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}\PY{c+c1}{\PYZsh{}we always get a sample}
+                    \PY{n}{samples}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acceptance Ratio: }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{naccept}\PY{o}{/}\PY{n}{nsamp}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{samples}\PY{p}{,} \PY{n}{naccept}\PY{o}{/}\PY{n}{nsamp}
+        
+        \PY{c+c1}{\PYZsh{} Define the proposal function:}
+        \PY{k}{def} \PY{n+nf}{proposal}\PY{p}{(}\PY{n}{xstate}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{permutation}\PY{p}{(}\PY{n}{xstate}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Define plotting functions}
+        \PY{k}{def} \PY{n+nf}{make\PYZus{}plots}\PY{p}{(}\PY{n}{hvals}\PY{p}{)}\PY{p}{:}
+            \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Make a trace plot over the history:}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{hvals}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trace Plot of Hash Value Movement}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hash Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Plot histogram of movie guesses in order:}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{hvals}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hash Value of Ranking Order}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Occurrences}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Histogram Of Movie Rankings}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            
+            \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} Define method to extract best sets}
+        \PY{k}{def} \PY{n+nf}{extract\PYZus{}best}\PY{p}{(}\PY{n}{hvals}\PY{p}{,} \PY{n}{samples}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Get the 5 most probable ranking orders:}
+            \PY{n}{count} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{n}{hvals}\PY{p}{)}
+            \PY{n}{comm} \PY{o}{=} \PY{n}{count}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Map most common back to their tuples \PYZhy{}\PYZhy{}\PYZgt{} this is super inefficient, I think, but it works}
+            \PY{n}{hval\PYZus{}idx} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{best\PYZus{}tuples} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{val}\PY{p}{,} \PY{n}{occ} \PY{o+ow}{in} \PY{n}{comm}\PY{p}{:}
+                \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{hvals}\PY{o}{==}\PY{n}{val}\PY{p}{)}
+                \PY{n}{hval\PYZus{}idx} \PY{o}{=} \PY{n}{hvals}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{val}\PY{p}{)}
+                \PY{n}{best\PYZus{}tuples}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{samples}\PY{p}{[}\PY{n}{hval\PYZus{}idx}\PY{p}{]}\PY{p}{,} \PY{n}{occ}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{best\PYZus{}tuples}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Create an initial state and run the metropolis}
+        \PY{n}{burn} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{xinit} \PY{o}{=} \PY{n}{proposal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Run metropolis over lambdas}
+        \PY{n}{lam} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{]}
+        \PY{n}{nsamp} \PY{o}{=} \PY{l+m+mi}{500}
+        \PY{n}{best\PYZus{}movies} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{samps} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{lam\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{lam}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LAMBDA:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lam\PYZus{}val}\PY{p}{)}
+            \PY{n}{p\PYZus{}partial} \PY{o}{=} \PY{n}{functools}\PY{o}{.}\PY{n}{partial}\PY{p}{(}\PY{n}{p\PYZus{}guess}\PY{p}{,} \PY{n}{lam\PYZus{}val}\PY{p}{)}
+            \PY{n}{samps\PYZus{}temp}\PY{p}{,} \PY{n}{acc\PYZus{}rat} \PY{o}{=} \PY{n}{metropolis}\PY{p}{(}\PY{n}{p\PYZus{}partial}\PY{p}{,} \PY{n}{proposal}\PY{p}{,} \PY{n}{nsamp}\PY{p}{,} \PY{n}{xinit}\PY{p}{)}
+            \PY{n}{samps}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{samps\PYZus{}temp}\PY{p}{)}
+            \PY{n}{hvals} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n+nb}{hash}\PY{p}{,} \PY{n}{samps\PYZus{}temp}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Make the plots}
+            \PY{n}{make\PYZus{}plots}\PY{p}{(}\PY{n}{hvals}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Get the top 5 values}
+            \PY{n}{best\PYZus{}movies}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{extract\PYZus{}best}\PY{p}{(}\PY{n}{hvals}\PY{p}{,} \PY{n}{samps\PYZus{}temp}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 500/500 [00:00<00:00, 12480.00it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LAMBDA: 0.2
+Acceptance Ratio: 0.8900
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 500/500 [00:00<00:00, 10604.91it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LAMBDA: 0.5
+Acceptance Ratio: 0.6700
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 500/500 [00:00<00:00, 11693.46it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LAMBDA: 1.0
+Acceptance Ratio: 0.5040
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Print out the top 5 best parameters}
+        \PY{n}{omega}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{best} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{best\PYZus{}movies}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For lambda=}\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s1}{, common ranks (occurrences) are:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{lam}[i])
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{best}\PY{p}{)}
+            \PY{n}{dist} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{guess} \PY{o+ow}{in} \PY{n}{best}\PY{p}{:}
+                \PY{n}{dist}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{dhamm}\PY{p}{(}\PY{n}{omega}\PY{p}{,}\PY{n}{guess}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distances:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For lambda=0.2, common ranks (occurrences) are:
+[((1, 2, 3, 4, 5), 17), ((1, 3, 2, 4, 5), 11), ((1, 2, 4, 3, 5), 10), ((1, 4, 3, 5, 2), 10), ((3, 1, 4, 2, 5), 10)]
+Distances: [0, 2, 2, 3, 4] 
+
+For lambda=0.5, common ranks (occurrences) are:
+[((1, 2, 3, 4, 5), 26), ((1, 4, 3, 2, 5), 19), ((4, 2, 3, 5, 1), 17), ((1, 5, 2, 4, 3), 17), ((5, 2, 3, 1, 4), 14)]
+Distances: [0, 2, 3, 3, 3] 
+
+For lambda=1.0, common ranks (occurrences) are:
+[((1, 2, 3, 4, 5), 39), ((1, 2, 3, 5, 4), 28), ((1, 5, 3, 4, 2), 27), ((1, 2, 5, 4, 3), 25), ((4, 2, 3, 1, 5), 24)]
+Distances: [0, 2, 2, 2, 2] 
+
+
+    \end{Verbatim}
+
+    We see that the metropolis algorithm does not generate the correct order
+ranking sample as one of it's top outputs unless the lambda is large. In
+this case, we have not done burn-in, but in general, you will need to do
+this to correct for the initial lag time in converge to the true
+transition matrix. We choose not to do so in this case because it is
+such a small model with very few parameters that it is not necessary to
+do.
+
+To analyze the results, we can look at the hamming distances for each of
+the best guesses. We have printed those below the best guesses above.
+What we first notice is that there is no entry for a Hamming distance of
+1. This makes sense based on the fact that the Hamming distance measures
+how many are out of order, and it is not possible to only have one movie
+out of order. What we also notice is that for larger lambda, the
+distances of the guesses are smaller than the distances of the guesses
+in lower lambdas. This is to be expected given that lambda acts as a
+penalty factor on the distance.
+
+    \subsubsection{Part B:}\label{part-b}
+
+Using the Metropolis algorithm, compute the probability that \emph{The
+Shawshank Redemption} is ranked as the top movie (ranked number 1) .
+Compare the resulting probabilities for the various different
+\(\lambda\) values. Summarize your findings.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Count the number of occurences in the top spot for each of the movies}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{lam\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{lam}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count\PYZus{}first} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{n}{elem}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{samps}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{For Lambda = }\PY{l+s+si}{\PYZpc{}.1f}\PY{l+s+s1}{:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Shawshank First Number = }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Shawshank First Probability = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} 
+                  \PY{p}{(}\PY{n}{lam\PYZus{}val}\PY{p}{,} \PY{n}{count\PYZus{}first}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{count\PYZus{}first}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{n}{nsamp}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For Lambda = 0.2:
+ Shawshank First Number = 128
+ Shawshank First Probability = 0.2560
+
+For Lambda = 0.5:
+ Shawshank First Number = 153
+ Shawshank First Probability = 0.3060
+
+For Lambda = 1.0:
+ Shawshank First Number = 207
+ Shawshank First Probability = 0.4140
+
+
+    \end{Verbatim}
+
+    In the case of low values of lambda, we see that the actual number one
+movie does not always sample as the number one movie in our ranking
+system. It is still more likely than if sampling were uniform
+distribution in any event, but in the case of higher values of lambda,
+we clearly see that the first movie dominates the first position. This
+is to be expected given that lambda acts as a penalty factor on an
+incorrect guess for a higher distance. This also matches up with the
+behavior of the entries in the top 5 guesses demonstrated in part A.
+
+    \subsection{Problem 2: Lensed Galaxies via
+Metropolis-Hastings}\label{problem-2-lensed-galaxies-via-metropolis-hastings}
+
+You are a renowned observational astronomer working on gravitational
+lensing and you just got news about a source whose morphology appears
+distorted, most likely because there is a foreground source (an ensemble
+of mini black holes for which you know the mass and position) acting as
+a lens. Your gravitational lensing calculations indicate that the
+detected flux \(F\) from the background source as a function of right
+ascencion (\(x\)) and declination (\(y\)) can be described by a modified
+Beale's function:
+
+\$F(x,y) =
+\exp\left[-\left(\frac{x^2}{2\sigma_x^2}+\frac{y^2}{2\sigma_y^2}\right)\right] \log (1.0+(1.5-x+xy)\textsuperscript{2+(2.25-x+xy}2)\textsuperscript{2+(2.625-x+xy}3)\^{}2)
+\$
+
+with \(\sigma_x = \sigma_y = \sqrt 10\)
+
+You are interested in observing this source with the Hubble Space
+Telescope, and you want to simulate beforehand how photons will form the
+image on the Hubble detector. You realize that a good way to do this is
+by sampling F(x,y) with a Monte Carlo method.
+
+\subsubsection{Part A:}\label{part-a}
+
+Using the following asymmetric function as a proposal distribution:
+
+\$q(x,y) =
+\frac{1}{\sqrt{2 \pi \gamma_1\gamma_2}} {\rm exp}\left[-\left(\frac{(x-0.1)^2}{2 \gamma_1^2} + \frac{(y-0.1)^2}{2 \gamma_2^2}\right) \right] \$
+
+with \(\gamma_1 = 1.0\beta\), \(\gamma_2 = 1.5\beta\), and \(\beta=1\)
+(x and y are the coordinates of the proposed step if we center the
+coordinate system in our current position.)
+
+construct a Metropolis-Hastings algorithm to produce \(N=100,000\)
+samples from \(F(x,y)\) with an initial position of \((x,y) = (5,-5)\).
+Plot the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Define flux function:}
+        \PY{k}{def} \PY{n+nf}{flux}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{sigx}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{sigy}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{T1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{sigx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{n}{y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{sigy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+            \PY{n}{T2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{1.5}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{o}{+}\PY{n}{x}\PY{o}{*}\PY{n}{y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{2.25}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{o}{+}\PY{n}{x}\PY{o}{*}\PY{n}{y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{2.625}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{o}{+}\PY{n}{x}\PY{o}{*}\PY{n}{y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{T1}\PY{o}{*}\PY{n}{T2}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} Define proposal function;}
+        \PY{k}{def} \PY{n+nf}{qPDF}\PY{p}{(}\PY{n}{Xnew}\PY{p}{,} \PY{n}{Xold}\PY{p}{,} \PY{n}{beta}\PY{p}{)}\PY{p}{:}
+            \PY{n}{g1} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{beta}
+            \PY{n}{g2} \PY{o}{=} \PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{beta}
+            \PY{n}{Xstep} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{Xnew}\PY{p}{,} \PY{n}{Xold}\PY{p}{)}
+            \PY{n}{q\PYZus{}out} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{Xstep}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{g1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{Xstep}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{g2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{q\PYZus{}out}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define q draw:}
+        \PY{k}{def} \PY{n+nf}{qDRAW}\PY{p}{(}\PY{n}{Xold}\PY{p}{,} \PY{n}{beta}\PY{p}{)}\PY{p}{:}
+            \PY{n}{g1} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{beta}
+            \PY{n}{g2} \PY{o}{=} \PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{beta}
+            \PY{n}{Xstep} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{g1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{g2}\PY{p}{)} \PY{p}{]}
+            
+            \PY{n}{Xnew} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Xold}\PY{p}{,} \PY{n}{Xstep}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{Xnew}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}Define metropolis hastings algorithm:}
+        \PY{k}{def} \PY{n+nf}{metropolis\PYZus{}hastings}\PY{p}{(}\PY{n}{p}\PY{p}{,} \PY{n}{q}\PY{p}{,} \PY{n}{qdraw}\PY{p}{,} \PY{n}{nsamp}\PY{p}{,} \PY{n}{xinit}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+            \PY{n}{samples}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{nsamp}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{x\PYZus{}prev} \PY{o}{=} \PY{n}{xinit}
+            \PY{n}{accepted}\PY{o}{=}\PY{l+m+mi}{0}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{o}{.}\PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nsamp}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x\PYZus{}star} \PY{o}{=} \PY{n}{qdraw}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta}\PY{p}{)}
+                \PY{n}{p\PYZus{}star} \PY{o}{=} \PY{n}{p}\PY{p}{(}\PY{n}{x\PYZus{}star}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}star}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{p\PYZus{}prev} \PY{o}{=} \PY{n}{p}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x\PYZus{}prev}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+                \PY{n}{pdfratio} \PY{o}{=} \PY{n}{p\PYZus{}star}\PY{o}{/}\PY{n}{p\PYZus{}prev}
+                \PY{n}{proposalratio} \PY{o}{=} \PY{n}{q}\PY{p}{(}\PY{n}{x\PYZus{}prev}\PY{p}{,} \PY{n}{x\PYZus{}star}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta}\PY{p}{)}\PY{o}{/}\PY{n}{q}\PY{p}{(}\PY{n}{x\PYZus{}star}\PY{p}{,} \PY{n}{x\PYZus{}prev}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb}{min}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{pdfratio}\PY{o}{*}\PY{n}{proposalratio}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{samples}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{x\PYZus{}star}
+                    \PY{n}{x\PYZus{}prev} \PY{o}{=} \PY{n}{x\PYZus{}star}
+                    \PY{n}{accepted} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}\PY{c+c1}{\PYZsh{}we always get a sample}
+                    \PY{n}{samples}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{=} \PY{n}{x\PYZus{}prev}
+                    
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accepted Fraction:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accepted}\PY{o}{/}\PY{n}{nsamp}\PY{p}{)}
+            \PY{k}{return} \PY{n}{samples}\PY{p}{,} \PY{n}{accepted}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{beta}\PY{o}{=}\PY{l+m+mi}{1}
+         \PY{n}{x0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]}
+         \PY{n}{samps}\PY{p}{,} \PY{n}{accepted} \PY{o}{=} \PY{n}{metropolis\PYZus{}hastings}\PY{p}{(}\PY{n}{flux}\PY{p}{,} \PY{n}{qPDF}\PY{p}{,} \PY{n}{qDRAW}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,} \PY{n}{x0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:04<00:00, 21894.88it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.76095
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Plot the analytic distribution and the sampling underneath it:}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{Z} \PY{o}{=} \PY{n}{flux}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{cset} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{zdir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{z}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{)}
+         \PY{n}{cset} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{zdir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{)}
+         \PY{n}{cset} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{zdir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim3d}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim3d}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlim3d}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{;}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3D Functional Form For Flux}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot only the contour plot:}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist2d}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2D Histogram Under the Contour Plot of F(x,y)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}plots}\PY{p}{(}\PY{n}{samps}\PY{p}{,} \PY{n}{burnin}\PY{p}{,} \PY{n}{maxlags}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{maxlags} \PY{o}{=} \PY{l+m+mi}{100}
+             \PY{c+c1}{\PYZsh{} Trace 1}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{n}{burnin}\PY{p}{:}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trace Plot of X Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Trace 2}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{n}{burnin}\PY{p}{:}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trace Plot of Y Values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Autocorr 1}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{acorr}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}  \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{maxlags}\PY{o}{=}\PY{n}{maxlags}\PY{p}{)}\PY{p}{;}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{maxlags}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Autocorrelation of X values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Autocorr 2}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{acorr}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{samps}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}  \PY{n}{normed}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{maxlags}\PY{o}{=}\PY{n}{maxlags}\PY{p}{)}\PY{p}{;}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{maxlags}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Autocorrelation of Y values}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Function Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Make the plots:}
+         \PY{n}{make\PYZus{}plots}\PY{p}{(}\PY{n}{samps}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Part B:}\label{part-b}
+
+We want to experiment with \(\beta\) by running your code with \(\beta\)
+in the range 0.1 to 40 (think about the appropriate order of magnitude
+of the \(\beta\) spacing).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Plot the accepted sample histories for each \(\beta\). What is the
+  acceptance rate for each \(\beta\)?
+\item
+  Explain your results and select the "best" value of \(\beta\)?
+\end{enumerate}
+
+    Given that the beta shows up in an exponential fashion, it makes sense
+to do log spacing on the beta values between 0.1 to 40. As a result, we
+will get a better sense of the effect of a change in beta value on the
+result, rather than performing pure linear spacing
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{burnin} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{betas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{betas}\PY{p}{)}
+         \PY{n}{accepted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{betas}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Run a loop over the beta values}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{beta\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{betas}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Beta:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{beta\PYZus{}val}\PY{p}{)}
+             \PY{n}{x0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]}
+             \PY{n}{samps}\PY{p}{,} \PY{n}{accepted}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{metropolis\PYZus{}hastings}\PY{p}{(}\PY{n}{flux}\PY{p}{,} \PY{n}{qPDF}\PY{p}{,} \PY{n}{qDRAW}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,} \PY{n}{x0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta\PYZus{}val}\PY{p}{)}  
+             
+             \PY{c+c1}{\PYZsh{} Plot traces and autocorrelation}
+             \PY{n}{make\PYZus{}plots}\PY{p}{(}\PY{n}{samps}\PY{p}{,}\PY{n}{burnin}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accepted:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accepted}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1599/100000 [00:00<00:06, 15967.97it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[  0.1          0.19458877   0.3786479    0.7368063    1.43374233
+   2.78990159   5.42883523  10.5639038   20.55617066  40.        ]
+Beta: 0.1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19024.13it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.21806
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 3248/100000 [00:00<00:05, 16225.32it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.194588771758
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19933.67it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.53556
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  1\%|          | 1206/100000 [00:00<00:08, 12045.68it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.378647900941
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19914.21it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.73675
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1829/100000 [00:00<00:05, 18266.63it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.736806299728
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18965.89it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.79031
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1784/100000 [00:00<00:05, 17826.42it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 1.43374232887
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18869.18it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.70524
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_24.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 3069/100000 [00:00<00:06, 15332.88it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 2.78990158792
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18356.78it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.54855
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 3095/100000 [00:00<00:06, 15468.21it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 5.42883523319
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19399.01it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.31957
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_34.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 2618/100000 [00:00<00:07, 13039.66it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 10.563903801
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19105.28it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.1272
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1666/100000 [00:00<00:05, 16655.01it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 20.556170656
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18924.72it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.03848
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_44.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1764/100000 [00:00<00:05, 17616.03it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 40.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:04<00:00, 20138.52it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.01055
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_49.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted: [ 21806.  53556.  73675.  79031.  70524.  54855.  31957.  12720.   3848.
+   1055.]
+
+    \end{Verbatim}
+
+    Now we can analyze the different selections for beta and pick which is
+the best one. We see that a low value of beta has extremely large
+autocorrelation, and the trace plot does not behave as randomly as we
+might want or expect. After trying larger values of beta, we see that at
+intermediate beta values, we obtain a quick decay of the autocorrelation
+and a random pattern to the trace plot, however, when the beta values
+are increased higher, the autocorrelation returns and a pattern emerges
+to our trace plot. What happens in the large beta case is that the
+algorithm suggests very large step sizes, but the metropolis algorithm
+does not want to take these steps because the values of the function are
+likely extremely different for large steps. What results is that the
+algorithm will get stuck at one particular location for a long period of
+time before being able to jump out. As a result, we see a lot of
+autocorrelation from point to point. Finally, we should also look at the
+acceptance rates of each of algorithms, as we want a balance of taking
+audacious steps and also keeping it reasonable.
+
+With all of this in mind, we can pick out an optimal beta value from our
+list of choices. In this particular example of N=10 beta values, we'll
+estimate that the best beta is the one that has sharply decreasing
+autocorrelation of both components and has a random pattern to the trace
+plot. In this case, that happens to be beta=2.78 which gives an
+acceptance rate of 50\% and a sharply decreasing autocorrelation that
+dies out at around N=20
+
+    \subsubsection{Part C:}\label{part-c}
+
+Choose a symmetric proposal and construct a Metropolis algorithm to
+product \(N=100,000\) samples from \(F(x,y)\) with an initial position
+of \((x,y) = (5,-5)\). Plot the results. How do the results compare to
+those from Metropolis-Hastings in \textbf{Parts A \& B}?
+
+    Let's now try the same process, but with a symmetric proposal function
+instead. To do so, we can simply remove the offset in the mean from the
+proposal function
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Define proposal function;}
+         \PY{k}{def} \PY{n+nf}{qPDF\PYZus{}symm}\PY{p}{(}\PY{n}{Xnew}\PY{p}{,} \PY{n}{Xold}\PY{p}{,} \PY{n}{beta}\PY{p}{)}\PY{p}{:}
+             \PY{n}{g1} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{beta}
+             \PY{n}{g2} \PY{o}{=} \PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{beta}
+             \PY{n}{Xstep} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{Xnew}\PY{p}{,} \PY{n}{Xold}\PY{p}{)}
+             \PY{n}{q\PYZus{}out} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{Xstep}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{g1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{n}{Xstep}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{g2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{q\PYZus{}out}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Define q draw:}
+         \PY{k}{def} \PY{n+nf}{qDRAW\PYZus{}symm}\PY{p}{(}\PY{n}{Xold}\PY{p}{,} \PY{n}{beta}\PY{p}{)}\PY{p}{:}
+             \PY{n}{g1} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{o}{*}\PY{n}{beta}
+             \PY{n}{g2} \PY{o}{=} \PY{l+m+mf}{1.5}\PY{o}{*}\PY{n}{beta}
+             \PY{n}{Xstep} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{g1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{n}{g2}\PY{p}{)} \PY{p}{]}
+             
+             \PY{n}{Xnew} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Xold}\PY{p}{,} \PY{n}{Xstep}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{Xnew}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{burnin} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{betas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{geomspace}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{N}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{betas}\PY{p}{)}
+         \PY{n}{accepted\PYZus{}symm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{betas}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Run a loop over the beta values}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{beta\PYZus{}val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{betas}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Beta:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{beta\PYZus{}val}\PY{p}{)}
+             \PY{n}{x0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]}
+             \PY{n}{samps}\PY{p}{,} \PY{n}{accepted\PYZus{}symm}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{metropolis\PYZus{}hastings}\PY{p}{(}\PY{n}{flux}\PY{p}{,} \PY{n}{qPDF\PYZus{}symm}\PY{p}{,} \PY{n}{qDRAW\PYZus{}symm}\PY{p}{,} \PY{l+m+mi}{100000}\PY{p}{,} \PY{n}{x0}\PY{p}{,} \PY{n}{beta}\PY{o}{=}\PY{n}{beta\PYZus{}val}\PY{p}{)}  
+             
+             \PY{c+c1}{\PYZsh{} Plot traces and autocorrelation}
+             \PY{n}{make\PYZus{}plots}\PY{p}{(}\PY{n}{samps}\PY{p}{,}\PY{n}{burnin}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1844/100000 [00:00<00:05, 18432.63it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[  0.1          0.19458877   0.3786479    0.7368063    1.43374233
+   2.78990159   5.42883523  10.5639038   20.55617066  40.        ]
+Beta: 0.1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18155.31it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.97277
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 2479/100000 [00:00<00:07, 12358.30it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.194588771758
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18738.22it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.94619
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1541/100000 [00:00<00:06, 15164.06it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.378647900941
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18940.34it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.90013
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 3181/100000 [00:00<00:06, 15866.05it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 0.736806299728
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:04<00:00, 20156.49it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.82424
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 3039/100000 [00:00<00:06, 15188.86it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 1.43374232887
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:04<00:00, 20377.59it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.71126
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_24.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  1\%|▏         | 1295/100000 [00:00<00:07, 12943.69it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 2.78990158792
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19900.53it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.55069
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_29.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1545/100000 [00:00<00:06, 15433.97it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 5.42883523319
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19666.77it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.31878
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_34.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3\%|▎         | 2696/100000 [00:00<00:07, 13474.13it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 10.563903801
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19851.25it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.12773
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_39.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 1774/100000 [00:00<00:05, 17678.31it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 20.556170656
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 19511.03it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.03961
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_44.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+  2\%|▏         | 2143/100000 [00:00<00:09, 10708.84it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beta: 40.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 100000/100000 [00:05<00:00, 18914.65it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Accepted Fraction: 0.01037
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_49.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s print out the accepted values for each of the two cases and compare:}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Best:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{betas}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Asymmetric Accepted:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accepted}\PY{o}{/}\PY{l+m+mi}{100000}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Symmetric Accepted:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{accepted\PYZus{}symm}\PY{o}{/}\PY{l+m+mi}{100000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best:
+ [  0.1          0.19458877   0.3786479    0.7368063    1.43374233
+   2.78990159   5.42883523  10.5639038   20.55617066  40.        ]
+Asymmetric Accepted:
+ [ 0.21806  0.53556  0.73675  0.79031  0.70524  0.54855  0.31957  0.1272
+  0.03848  0.01055]
+Symmetric Accepted:
+ [ 0.97277  0.94619  0.90013  0.82424  0.71126  0.55069  0.31878  0.12773
+  0.03961  0.01037]
+
+    \end{Verbatim}
+
+    Now we should compare the results of the two different proposal
+functions. We first of all notice that the accepted fractions are nearly
+exactly equal in both cases. This is the purpose of the
+Metropolis-Hastings - in other words, the Hastings algorithm generates
+the correction needed to counteract the asymmetry. We see a similar
+trend in all of the autocorrelation and trace plots and extract the
+optimal value of beta in both cases to be about the same.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
